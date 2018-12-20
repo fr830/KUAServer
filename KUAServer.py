@@ -59,7 +59,7 @@ if __name__ == "__main__":
         groot.add_variable(idx, "Property sets", tPropSets, ua.VariantType.Int16 )
         groot_currenttime = groot.add_variable(idx, "CurrentTime", datetime.now(), ua.VariantType.DateTime)
 
-        print("Building Server Hierarchy...in progress")
+        print("Building Server Hierarchy...in progress, can connect")
         AddRootNode(idx, objects, "N", tNodes, tDepth, tPropSets, 0)      
         print("Hierarchy Tree Built")  
 
