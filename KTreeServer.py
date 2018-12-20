@@ -61,7 +61,7 @@ if __name__ == "__main__":
         groot_currenttime = groot.add_variable(idx, "CurrentTime", datetime.now(), ua.VariantType.DateTime)
 
         groot_totalnodes.set_data_value(0, ua.VariantType.UInt32)
-        print("Building Server Hierarchy, can connect while building tree...")
+        print("Building Server Hierarchy, can connect while building ...")
         AddRootNode(idx, objects, "N", tNodes, tDepth, tPropSets, 0)      
 
         totalNodes = pow(tNodes, tDepth+1)
