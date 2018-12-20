@@ -64,7 +64,7 @@ if __name__ == "__main__":
         print("Building Server Hierarchy, can connect while building tree...")
         AddRootNode(idx, objects, "N", tNodes, tDepth, tPropSets, 0)      
 
-        totalNodes = pow(tNodes, tDepth+1)
+        totalNodes = pow(tNodes, tDepth+1) - 1
         print("Hierarchy Tree Built with ", totalNodes, " Nodes")  
         groot_totalnodes.set_data_value(totalNodes, ua.VariantType.UInt32) 
 
