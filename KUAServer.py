@@ -17,6 +17,7 @@ def AddPropertyVars(idx, parentNode, totVarSets):
 def AddRootNode(idx, rootNode, baseName, totNodes, totDepth, totPropSets, currDepth):
     currDepth = currDepth + 1
     if currDepth <= totDepth:
+        AddToNodeCount(totNodes)
         for i in range(0, totNodes):
             if currDepth == totDepth:
                 groot = rootNode.add_object(idx, baseName+"_"+ str(currDepth) + "_" + str(i))
@@ -24,8 +25,14 @@ def AddRootNode(idx, rootNode, baseName, totNodes, totDepth, totPropSets, currDe
             else:
                 groot = rootNode.add_object(idx, baseName+"_"+ str(currDepth) + "_" + str(i))
                 AddPropertyVars(idx, groot, totPropSets)
-                AddRootNode(idx, groot, baseName, totNodes, totDepth, totPropSets, currDepth)  
+                AddRootNode(idx, groot, baseName, totNodes, totDepth, totPropSets, currDepth)
 
+
+def AddToNodeCount(nAdds):
+    tnods = groot_totalnodes.get_data_value()
+    currNodeCount = tnods.Value.Value
+    totNodeCount = nAdds + currNodeCount
+    groot_totalnodes.set_data_value(totNodeCount, ua.VariantType.UInt32)
 
 
 if __name__ == "__main__":
@@ -49,9 +56,9 @@ if __name__ == "__main__":
     
     try:
         # run robot simulation
-        tNodes = 5
-        tDepth = 5
-        tPropSets = 1
+        tNodes = 3
+        tDepth = 3
+        tPropSets = 0
 
         groot = objects.add_object(idx,"Groot")
         groot.add_variable(idx, "Nodes per branch", tNodes, ua.VariantType.Int16 )
@@ -64,9 +71,9 @@ if __name__ == "__main__":
         print("Building Server Hierarchy, may connect while constructing...")
         AddRootNode(idx, objects, "N", tNodes, tDepth, tPropSets, 0)      
 
-        totalNodes = pow(tNodes, tDepth+1) - 1
+        totalNodes = pow(tNodes, tDepth) - 1
         print("Hierarchy Tree Built with ", totalNodes, " Nodes")  
-        groot_totalnodes.set_data_value(totalNodes, ua.VariantType.UInt32) 
+        #groot_totalnodes.set_data_value(totalNodes, ua.VariantType.UInt32)
 
         while True:
             time.sleep(1)
