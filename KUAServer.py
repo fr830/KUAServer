@@ -69,7 +69,8 @@ if __name__ == "__main__":
 
         groot_totalnodes.set_data_value(0, ua.VariantType.UInt32)
         print("Building Server Hierarchy, may connect while constructing...")
-        AddRootNode(idx, objects, "N", tNodes, tDepth, tPropSets, 0)      
+        AddRootNode(idx, objects, "N", tNodes, tDepth, tPropSets, 0)
+        print("Hierarchy Complete")
 
 
         while True:
