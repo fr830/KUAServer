@@ -39,12 +39,12 @@ if __name__ == "__main__":
 
     # setup our server
     server = opcua.Server()
-    server.set_server_name("KTreeServer")
-    server.set_application_uri("urn:" + socket.gethostname() + ":KTreeServer")
-    server.set_endpoint("opc.tcp://localhost:4845")
+    server.set_server_name("KUAServer")
+    server.set_application_uri("urn:" + socket.gethostname() + ":KUAServer")
+    server.set_endpoint("opc.tcp://localhost:4846")
 
     # setup our own namespace
-    uri = "http://opcfoundation.org/UA/KTreeServer/"
+    uri = "http://opcfoundation.org/UA/KUAServer/"
     idx = server.register_namespace(uri)
 
 
