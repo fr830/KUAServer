@@ -6,19 +6,16 @@ from opcua import ua
 from datetime import datetime
 
 def AddPropertyVars(idx, parentNode, totVarSets):
-    for i in range(0, totVarSets):
-        currTime = datetime.now()
+    for i in range(1, totVarSets+1):
         parentNode.add_variable(idx, "VariableDbl"+"_"+str(i), tNodes, ua.VariantType.Double )
         parentNode.add_variable(idx, "VariableInt"+"_"+str(i), tNodes, ua.VariantType.Int16 )
         parentNode.add_variable(idx, "VariableStr"+"_"+str(i), tNodes, ua.VariantType.String )
-        parentNode.add_variable(idx, "VariableTimeStamp"+"_"+str(i), currTime, ua.VariantType.DateTime)
-
 
 def AddRootNode(idx, rootNode, baseName, totNodes, totDepth, totPropSets, currDepth):
     currDepth = currDepth + 1
     if currDepth <= totDepth:
         AddToNodeCount(totNodes)
-        for i in range(0, totNodes):
+        for i in range(1, totNodes+1):
             if currDepth == totDepth:
                 groot = rootNode.add_object(idx, baseName+"_"+ str(currDepth) + "_" + str(i))
                 AddPropertyVars(idx, groot, totPropSets)
@@ -58,7 +55,7 @@ if __name__ == "__main__":
         # run robot simulation
         tNodes = 3
         tDepth = 3
-        tPropSets = 0
+        tPropSets = 1
 
         groot = objects.add_object(idx,"Groot")
         groot.add_variable(idx, "Nodes per branch", tNodes, ua.VariantType.Int16 )
@@ -69,7 +66,7 @@ if __name__ == "__main__":
 
         groot_totalnodes.set_data_value(0, ua.VariantType.UInt32)
         print("Building Server Hierarchy, may connect while constructing...")
-        AddRootNode(idx, objects, "N", tNodes, tDepth, tPropSets, 0)
+        AddRootNode(idx, groot, "N", tNodes, tDepth, tPropSets, 0)
         print("Hierarchy Complete")
 
 
