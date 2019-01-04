@@ -6,10 +6,13 @@ from opcua import ua
 from datetime import datetime
 
 def AddPropertyVars(idx, parentNode, totVarSets):
+    
     for i in range(1, totVarSets+1):
+        AddToNodeCount(3)
         parentNode.add_variable(idx, "VariableDbl"+"_"+str(i), tNodes, ua.VariantType.Double )
         parentNode.add_variable(idx, "VariableInt"+"_"+str(i), tNodes, ua.VariantType.Int16 )
         parentNode.add_variable(idx, "VariableStr"+"_"+str(i), tNodes, ua.VariantType.String )
+        
 
 def AddRootNode(idx, rootNode, baseName, totNodes, totDepth, totPropSets, currDepth):
     currDepth = currDepth + 1
@@ -38,7 +41,7 @@ if __name__ == "__main__":
     server = opcua.Server()
     server.set_server_name("KUAServer")
     server.set_application_uri("urn:" + socket.gethostname() + ":KUAServer")
-    server.set_endpoint("opc.tcp://localhost:4846")
+    server.set_endpoint("opc.tcp://172.16.10.62:4846")
 
     # setup our own namespace
     uri = "http://opcfoundation.org/UA/KUAServer/"
@@ -54,7 +57,7 @@ if __name__ == "__main__":
     try:
         # run robot simulation
         tNodes = 3
-        tDepth = 3
+        tDepth = 4
         tPropSets = 1
 
         groot = objects.add_object(idx,"Groot")
@@ -66,8 +69,10 @@ if __name__ == "__main__":
 
         groot_totalnodes.set_data_value(0, ua.VariantType.UInt32)
         print("Building Server Hierarchy, may connect while constructing...")
-        AddRootNode(idx, groot, "N", tNodes, tDepth, tPropSets, 0)
-        print("Hierarchy Complete")
+        AddRootNode(idx, groot, "PYNode", tNodes, tDepth, tPropSets, 0)
+
+        numNodesTotal = groot_totalnodes.get_data_value().Value.Value
+        print("Hierarchy Complete : Total Nodes :", numNodesTotal)
 
 
         while True:
