@@ -8,10 +8,13 @@ from datetime import datetime
 def AddPropertyVars(idx, parentNode, totVarSets):
     
     for i in range(1, totVarSets+1):
-        AddToNodeCount(3)
+        AddToNodeCount(6)
         parentNode.add_variable(idx, "VariableDbl"+"_"+str(i), tNodes, ua.VariantType.Double )
         parentNode.add_variable(idx, "VariableInt"+"_"+str(i), tNodes, ua.VariantType.Int16 )
         parentNode.add_variable(idx, "VariableStr"+"_"+str(i), tNodes, ua.VariantType.String )
+        parentNode.add_property(idx, "PropertyString"+"_"+str(i), tNodes, ua.VariantType.String )
+        parentNode.add_property(idx, "PropertyInt"+"_"+str(i), tNodes, ua.VariantType.Int16 )
+        parentNode.add_property(idx, "PropertyDouble"+"_"+str(i), tNodes, ua.VariantType.Double )
         
 
 def AddRootNode(idx, rootNode, baseName, totNodes, totDepth, totPropSets, currDepth):
@@ -41,7 +44,7 @@ if __name__ == "__main__":
     server = opcua.Server()
     server.set_server_name("KUAServer")
     server.set_application_uri("urn:" + socket.gethostname() + ":KUAServer")
-    server.set_endpoint("opc.tcp://172.16.10.62:4846")
+    server.set_endpoint("opc.tcp://172.16.10.65:4846")
 
     # setup our own namespace
     uri = "http://opcfoundation.org/UA/KUAServer/"
@@ -56,7 +59,7 @@ if __name__ == "__main__":
     
     try:
         # run robot simulation
-        tNodes = 3
+        tNodes = 7
         tDepth = 4
         tPropSets = 1
 
