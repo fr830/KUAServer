@@ -41,10 +41,16 @@ def AddToNodeCount(nAdds):
 if __name__ == "__main__":
 
     # setup our server
+    import socket    
+    hostname = socket.gethostname()    
+    IPAddr = socket.gethostbyname(hostname)    
+    IPAddr = "172.16.10.53"
     server = opcua.Server()
     server.set_server_name("KUAServer")
     server.set_application_uri("urn:" + socket.gethostname() + ":KUAServer")
-    server.set_endpoint("opc.tcp://172.16.10.65:4846")
+    endPnt = "opc.tcp://"+IPAddr+":4846"
+    print("EndPoint:", endPnt)
+    server.set_endpoint(endPnt)
 
     # setup our own namespace
     uri = "http://opcfoundation.org/UA/KUAServer/"
@@ -62,6 +68,8 @@ if __name__ == "__main__":
         tNodes = 7
         tDepth = 4
         tPropSets = 1
+
+        print("Building a ",tNodes, " Nodes By ",tDepth, " Depth By ",tPropSets, " Property Sets Config Hierarchy")
 
         groot = objects.add_object(idx,"Groot")
         groot.add_variable(idx, "Nodes per branch", tNodes, ua.VariantType.Int16 )
