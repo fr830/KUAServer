@@ -9,12 +9,18 @@ def AddPropertyVars(idx, parentNode, totVarSets):
     
     for i in range(1, totVarSets+1):
         AddToNodeCount(6)
-        parentNode.add_variable(idx, "VariableDbl"+"_"+str(i), tNodes, ua.VariantType.Double )
-        parentNode.add_variable(idx, "VariableInt"+"_"+str(i), tNodes, ua.VariantType.Int16 )
-        parentNode.add_variable(idx, "VariableStr"+"_"+str(i), tNodes, ua.VariantType.String )
-        parentNode.add_property(idx, "PropertyString"+"_"+str(i), tNodes, ua.VariantType.String )
-        parentNode.add_property(idx, "PropertyInt"+"_"+str(i), tNodes, ua.VariantType.Int16 )
-        parentNode.add_property(idx, "PropertyDouble"+"_"+str(i), tNodes, ua.VariantType.Double )
+        v = parentNode.add_variable(idx, "VariableDbl"+"_"+str(i), 10.0, ua.VariantType.Double )
+        v.add_property(idx, "unit", "double", ua.VariantType.String )
+        
+        v = parentNode.add_variable(idx, "VariableInt"+"_"+str(i), 10, ua.VariantType.Int16 )
+        v.add_property(idx, "unit", "int", ua.VariantType.String )
+
+        v = parentNode.add_variable(idx, "VariableStr"+"_"+str(i), "10", ua.VariantType.String )
+        v.add_property(idx, "unit", "string", ua.VariantType.String )
+
+        #parentNode.add_property(idx, "PropertyString"+"_"+str(i), 10, ua.VariantType.String )
+        #parentNode.add_property(idx, "PropertyInt"+"_"+str(i), 10, ua.VariantType.Int16 )
+        #parentNode.add_property(idx, "PropertyDouble"+"_"+str(i), 10, ua.VariantType.Double )
         
 
 def AddRootNode(idx, rootNode, baseName, totNodesList, totPropSetsList, currDepth):
@@ -64,7 +70,7 @@ if __name__ == "__main__":
     try:
         # run robot simulation
         tNodeArray = [2,8,4,6]
-        tPropSetsArray = [0, 0, 0, 0]
+        tPropSetsArray = [5, 5, 5, 5]
 
         groot = objects.add_object(idx,"Groot")
         groot_totalnodes = groot.add_variable(idx, "Total Nodes", 0, ua.VariantType.Int32 )
