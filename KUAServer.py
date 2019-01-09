@@ -63,10 +63,6 @@ if __name__ == "__main__":
     
     try:
         # run robot simulation
-        tNodes = 7
-        tDepth = 4
-        tPropSets = 1
-
         tNodeArray = [2,8,4,6]
         tPropSetsArray = [0, 0, 0, 0]
 
