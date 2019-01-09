@@ -17,10 +17,6 @@ def AddPropertyVars(idx, parentNode, totVarSets):
 
         v = parentNode.add_variable(idx, "VariableStr"+"_"+str(i), "10", ua.VariantType.String )
         v.add_property(idx, "unit", "string", ua.VariantType.String )
-
-        #parentNode.add_property(idx, "PropertyString"+"_"+str(i), 10, ua.VariantType.String )
-        #parentNode.add_property(idx, "PropertyInt"+"_"+str(i), 10, ua.VariantType.Int16 )
-        #parentNode.add_property(idx, "PropertyDouble"+"_"+str(i), 10, ua.VariantType.Double )
         
 
 def AddRootNode(idx, rootNode, baseName, totNodesList, totPropSetsList, currDepth):
