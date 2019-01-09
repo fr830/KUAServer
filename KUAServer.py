@@ -67,12 +67,13 @@ if __name__ == "__main__":
         tPropSetsArray = [0, 0, 0, 0]
 
         groot = objects.add_object(idx,"Groot")
-        groot_totalnodes = groot.add_variable(idx, "Total Nodes", tPropSets, ua.VariantType.Int32 )
+        groot_totalnodes = groot.add_variable(idx, "Total Nodes", 0, ua.VariantType.Int32 )
 
         groot_totalnodes.set_data_value(0, ua.VariantType.UInt32)
         print("Building Server Hierarchy, may connect while constructing...")
         AddRootNode(idx, groot, "PYNode", tNodeArray, tPropSetsArray, 0)
 
+        AddToNodeCount(1)
         numNodesTotal = groot_totalnodes.get_data_value().Value.Value
         print("Hierarchy Complete : Total Nodes :", numNodesTotal)
 
